@@ -1,0 +1,270 @@
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+  <title>DemraBazar</title>
+  <meta content="" name="description" />
+  <meta content="" name="keywords" />
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon" />
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect" />
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet" />
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'vendor_dashboard/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+  <link href="{% static 'vendor_dashboard/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet" />
+  <link href="{% static 'vendor_dashboard/boxicons/css/boxicons.min.css' %}" rel="stylesheet" />
+  <link href="{% static 'vendor_dashboard/quill/quill.snow.css' %}" rel="stylesheet" />
+  <link href="{% static 'vendor_dashboard/quill/quill.bubble.css' %}" rel="stylesheet" />
+  <link href="{% static 'vendor_dashboard/remixicon/remixicon.css' %}" rel="stylesheet" />
+  <link href="{% static 'vendor_dashboard/simple-datatables/style.css' %}" rel="stylesheet" />
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'css_dashboard/style.css' %}" rel="stylesheet" />
+
+  <!-- =======================================================
+  * Template Name: DemraBazaar
+  * Updated: Jul 27 2023 with Bootstrap v5.3.1
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  <style>
+    .search-bar {
+      margin-top: 0.8%;
+    }
+    
+  </style>
+</head>
+
+<body>
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="{% url 'index' %}" class="logo d-flex align-items-center">
+        <img src="assets/img/logo.png" alt="" />
+        <span class="d-none d-lg-block">DemraBazar</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div>
+    <!-- End Logo -->
+
+        <!-- End Messages Nav -->
+
+        <li style="margin-left: 78%; margin-bottom: 2.3rem; font-weight: bold; font-size:larger" class="nav-item dropdown pe-3">
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <span class="d-none d-md-block dropdown-toggle ps-2">{{user_name}}</span>
+          </a><!-- End Profile Iamge Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="{% url 'logout' %}">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sign Out</span>
+              </a>
+            </li>
+          </ul>
+          <!-- End Profile Dropdown Items -->
+        </li>
+        <!-- End Profile Nav -->
+      </ul>
+    </nav>
+    <!-- End Icons Navigation -->
+  </header>
+  <!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+    <ul class="sidebar-nav" id="sidebar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'dashboard' %}">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <!-- End Dashboard Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-laptop"></i><span>Jobs</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{% url 'job' %}">
+              <i class="bi bi-circle"></i><span>All Jobs</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'post_job' %}">
+              <i class="bi bi-circle"></i><span>Post A Job</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <!-- End Forms Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#form-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-cart-plus"></i><span>Products</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="form-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{% url 'product' %}">
+              <i class="bi bi-circle"></i><span>All Products</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'post_product' %}">
+              <i class="bi bi-circle"></i><span>Post A Products</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </aside>
+  <!-- End Sidebar-->
+
+  <main id="main" class="main">
+    <div class="pagetitle">
+      <h1>Post A Job</h1>
+    </div>
+    <!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Post A Job</h5>
+
+              <!-- Post A Job -->
+              <form method="post">
+                {% csrf_token %}
+                <div class="row mb-3">
+                  <div class="col-sm-2">
+                    <label for="job_title" class="col-form-label">Job Title</label>
+                  </div>
+                  <div class="col-sm-4">
+                    <input name="job_title" id="job_title" type="text" required class="form-control" />
+                  </div>
+                  <div class="col-sm-2">
+                    <label for="job_city" class="col-form-label">Job City</label>
+                  </div>
+                  <div class="col-sm-4">
+                    <input name="job_city" id="job_city" type="text" required class="form-control" />
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <div class="col-sm-2">
+                    <label for="job_description" class="col-form-label">Job Description</label>
+                  </div>
+                  <div class="col-sm-10">
+                    <textarea class="form-control" name="job_description" id="job_description" required
+                      style="height: 100px"></textarea>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <div class="col-sm-2">
+                    <label for="job_city_postal" class="col-form-label">Job City Postal</label>
+                  </div>
+                  <div class="col-sm-4">
+                    <input name="job_city_postal" id="job_city_postal" type="text" required class="form-control" />
+                  </div>
+                  <div class="col-sm-2">
+                    <label for="company_name" class="col-form-label">Company Name</label>
+                  </div>
+                  <div class="col-sm-4">
+                    <input name="company_name" id="company_name" type="text" required class="form-control" />
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <div class="col-sm-2">
+                    <label for="email_to_apply" class="col-form-label">Email To Apply</label>
+                  </div>
+                  <div class="col-sm-4">
+                    <input name="email_to_apply" id="email_to_apply" type="email" required class="form-control" />
+                  </div>
+                  <div class="col-sm-2">
+                    <label for="user_posted" class="col-form-label">User Posted</label>
+                  </div>
+                  <div class="col-sm-4">
+                    <input name="user_posted" id="user_posted" type="hidden" required class="form-control"
+                      value="{{user_name}}" />
+                    <label class="col-form-label">{{user_name}}</label>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="employment_type" class="col-sm-3 col-form-label">Employment Type</label>
+                  <div class="col-sm-9">
+                    <select class="form-select" name="employment_type" id="employment_type" required
+                      aria-label="Default select example">
+                      <option selected value="Full-Time">Full Time</option>
+                      <option value="Part-Time">Part Time</option>
+                      <option value="Internship">Internship</option>
+                      <option value="Contract">Contract</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <div class="col-sm-12">
+                    <button type="submit" class="btn btn-primary">
+                      Post A Job
+                    </button>
+                  </div>
+                </div>
+              </form>
+              <!-- End Post A Job -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>DemraBazar</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+    </div>
+  </footer>
+  <!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'vendor_dashboard/apexcharts/apexcharts.min.js' %}"></script>
+  <script src="{% static 'vendor_dashboard/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'vendor_dashboard/chart.js/chart.umd.js' %}"></script>
+  <script src="{% static 'vendor_dashboard/echarts/echarts.min.js' %}"></script>
+  <script src="{% static 'vendor_dashboard/quill/quill.min.js' %}"></script>
+  <script src="{% static 'vendor_dashboard/simple-datatables/simple-datatables.js' %}"></script>
+  <script src="{% static 'vendor_dashboard/tinymce/tinymce.min.js' %}"></script>
+  <script src="{% static 'vendor_dashboard/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'js_dashboard/main.js' %}"></script>
+</body>
+
+</html>

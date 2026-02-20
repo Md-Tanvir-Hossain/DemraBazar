@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+  <title>DemraBazar</title>
+  <meta content="" name="description" />
+  <meta content="" name="keywords" />
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    * {
+      margin: 0;
+      font-family: Arial;
+      box-sizing: border-box;
+      background-color: #213b52;
+    }
+  
+    form,
+    input,
+    textarea {
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+
+    .contact-form {
+      padding: 20px;
+      border-radius: 10px;
+      margin-right: 5%;
+    }
+
+    .input-field,
+    .textarea-field {
+      background-color: white;
+      padding: 8px;
+      border: 2px solid white;
+      border-radius: 5px;
+      width: 35%;
+      margin-bottom: 10px;
+      margin-left: 35%;
+      transition: border-color 0.5s ease;
+    }
+
+    .head2 {
+      margin-left: 10%;
+      font-weight: bold;
+      padding: 10px 20px;
+      width: 80%;
+      text-align: center;
+    }
+    @keyframes slideInFromTop {
+      0% {
+          transform: translateY(-100%);
+      }
+      100% {
+          transform: translateY(0);
+      }
+  }
+    h1 {
+      font-size: 2em;
+      overflow: hidden;
+      white-space: nowrap;
+      animation: slideInFromTop 1s ease-in-out;
+    }
+  
+    h1 {
+      font-size: 2em;
+      overflow: hidden;
+      white-space: nowrap;
+      animation: slideInFromTop 1s ease-in-out;
+  }
+h1 {
+      font-size: 2em;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+      transition: color 0.3s ease-in-out;
+  }
+
+  h1::after {
+      content: '';
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: #007bff; /* Set the underline color */
+      transition: width 0.3s ease-in-out;
+  }
+
+  h1:hover {
+      color: #007bff; /* Change the text color on hover */
+  }
+
+  h1:hover::after {
+      width: 100%; /* Expand the underline on hover */
+  }
+
+    .navbar {
+      height: 80px;
+      background-color: #213b52;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      border-bottom: 1.5px solid white;
+    }
+
+    .logo a {
+      width: 10%;
+      height: 50px;
+      color: white;
+      text-decoration: none;
+      margin-right: 5%;
+    }
+
+    .cool-button {
+      position: relative;
+      display: inline-block;
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #fff;
+      background-color: #3498db;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      overflow: hidden;
+      z-index: 1;
+      background-image: linear-gradient(45deg, #3498db, #e74c3c, #1abc9c, #f39c12);
+      background-size: 400% 400%;
+      animation: gradientAnimation 7s infinite;
+      margin-left: 49%;
+    }
+
+    @keyframes gradientAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    #footer {
+      background-image: url("footer-bg.jpg");
+      color: #fff;
+      font-size: 14px;
+      position: relative;
+      text-align: center;
+    }
+
+    .footer-top {
+      position: relative;
+      text-align: center;
+      padding: 60px;
+    }
+
+    .footer-top h3 {
+      font-size: 36px;
+      font-weight: 700;
+      color: #fff;
+      position: relative;
+      font-family: "Poppins", sans-serif;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    .footer-top h4 {
+      font-size: 15px;
+      font-style: italic;
+      margin: 30px 0 0 0;
+      padding: 0;
+    }
+
+    .footer-bottom {
+      border-top: 1.5px solid white;
+      position: relative;
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+
+    .copyright {
+      text-align: center;
+    }
+
+    @media only screen and (max-width: 768px) {
+      body {
+        font-size: 14px;
+      }
+
+      .container {
+        margin-right: 0;
+        padding: 10px;
+      }
+
+      h1 {
+        font-size: 1.5em;
+        margin-left: 0;
+      }
+
+      .input-field,
+      .textarea-field {
+        width: 100%;
+        margin-left: 0;
+      }
+
+      .head2 {
+        margin-left: 10%;
+        font-size: 1.5em;
+        text-align: center;
+      }
+
+      .cool-button {
+        margin-left: 30%;
+      }
+    }
+   
+
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="navbar">
+      <div class="container d-flex align-items-center justify-content-between">
+        {% csrf_token %}
+        <div class="logo">
+          <h1>
+            <a href="{% url 'index' %}">DemraBazar<span>.</span></a>
+          </h1>
+        </div>
+      </div>
+    </div>
+  </header>
+  <br>
+  <br>
+  <br>
+  <!-- End Header -->
+  <a href="{% url 'contact' %}" style="text-decoration:none">
+    <h1 class="head2" style="color:#fff">Contact Us</h1>
+  </a>
+  <div class="col-lg-6 mt-4 mt-lg-0">
+    <form method="post" action="/contact" class="contact-form">
+      {% csrf_token %}
+      <input type="text" class="input-field" id="name" name="name" placeholder="Username" required />
+      <br />
+      <input type="email" class="input-field" id="mail" name="mail" placeholder="Email" required />
+      <br />
+      <input type="text" class="input-field" id="subject" name="subject" placeholder="Subject" required />
+      <br />
+      <textarea class="textarea-field" id="message" name="message" placeholder="Message" required
+        style="height:200px "></textarea>
+      <br />
+      <button type="submit" class="cool-button">Submit</button>
+    </form>
+  </div>
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-6">
+            <h3>DemraBazar</h3>
+            <h4>"Unlock Opportunities, Subscribe for Success!".</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom clearfix">
+      <div class="copyright">
+        &copy; Copyright <strong><span>DemraBazar</span></strong>. All Rights Reserved
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

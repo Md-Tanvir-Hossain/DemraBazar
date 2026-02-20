@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+  <title>DemraBazar</title>
+  <meta content="" name="description" />
+  <meta content="" name="keywords" />
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    * {
+      margin: 0px;
+      font-family: Arial;
+      border: border-box;
+      background-color: #213b52;
+    }
+    #game-board {
+
+        margin-left: 42%;
+        position: relative;
+        width: 300px;
+        height: 300px;
+        border: 1px solid #333;
+        background-color: #ddd;
+        /* Game board background color */
+        overflow: hidden;
+        /* Hide overflow for absolute positioning */
+        margin-top: 10%;
+      }
+
+      .snake {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: green;
+        border-radius: 50%;
+        /* Make snake circular */
+      }
+
+      .food {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: red;
+        border-radius: 50%;
+        /* Make food circular */
+      }
+
+      #score {
+        position: absolute;
+        top: 23%;
+        right: 47.5%;
+        font-size: 18px;
+        color: whitesmoke;
+        transition: transform 0.3s ease;
+        /* Animation for score display */
+        cursor: pointer;
+        font-size: 25px;
+        font-weight:bolder;
+      }
+
+      #score:hover {
+        transform: translateY(-5px);
+        /* Hover effect: move up slightly */
+      }
+      @keyframes slideInFromTop {
+        0% {
+          transform: translateY(-100%);
+        }
+
+        100% {
+          transform: translateY(0);
+        }
+      }
+    .social-links a {
+      width: 34px;
+      height: 21px;
+      font-size: 18px;
+      display: inline;
+      background: #284864;
+      color: #fff;
+      line-height: 1;
+      padding: 8px;
+      margin-right: 4px;
+      border-radius: 50%;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .social-links a:hover {
+      background: #fcb102;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    /* Reset some default styles for form elements */
+    form,
+    input,
+    textarea {
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+
+
+    /* Basic styling for the contact form container */
+    .contact-form {
+      /* Set background color to white */
+     
+      /* Add padding to the form container */
+      padding: 20px;
+
+      /* Add a border with a solid style, black color, and 2px width */
+      
+
+      /* Add rounded corners to the form container */
+      border-radius: 10px;
+      
+      margin-right: 90px;
+    }
+
+    /* Style for form inputs and textarea */
+    .input-field,
+    .textarea-field {
+      background-color: white;
+      /* Add padding to the inputs and textarea */
+      padding: 8px;
+
+      /* Add a border with a solid style, gray color, and 1px width */
+      border: 2px solid white;
+
+      /* Add rounded corners to the inputs and textarea */
+      border-radius: 5px;
+
+      /* Make the width 100% to fill the container */
+      width: 35%;
+
+      /* Add some margin at the bottom of each input */
+      margin-bottom: 10px;
+      margin-left: 34.5%;
+
+      /* Hover effect for inputs */
+      transition: border-color 0.5s ease;
+    }
+
+    /* Change border color on hover for inputs */
+    .input-field:hover,
+    .textarea-field:hover {
+      border-color: #000000;
+      /* Change to the desired hover color */
+    }
+
+    /* Style for the submit button */
+    .submit-button {
+      /* Set background color to a shade of blue */
+      background-color: #007bff;
+
+      /* Add padding to the button */
+      padding: 10px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-left: 50%;
+
+      /* Add border with a solid style, dark blue color, and 2px width */
+      border: 2px solid #0056b3;
+
+      /* Add rounded corners to the button */
+      border-radius: 5px;
+
+      /* Add text styling */
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+
+      /* Add cursor pointer on hover to indicate interactivity */
+      cursor: pointer;
+    }
+
+    /* Hover effect for the submit button */
+    .submit-button:hover {
+      /* Darken the background color on hover */
+      background-color: #0056b3;
+      /* a slightly darker shade of blue */
+    }
+
+    :placeholder {
+      /* Set the color of the placeholder text */
+      color: #f2ebeb;
+      /* You can use any valid color value */
+    }
+
+    .head2 {
+      margin-left: 44.5%;
+      font-weight: bold;
+      padding: 10px 20px;
+      width: 9%;
+
+    }
+
+    @keyframes slideInFromTop {
+      0% {
+        transform: translateY(-100%);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      font-size: 2em;
+      overflow: hidden;
+      white-space: nowrap;
+      animation: slideInFromTop 1s ease-in-out;
+    }
+
+    h1 {
+      font-size: 2em;
+      overflow: hidden;
+      white-space: nowrap;
+      animation: slideInFromTop 1s ease-in-out;
+    }
+
+    h1 {
+      font-size: 2em;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+      transition: color 0.3s ease-in-out;
+    }
+
+    h1::after {
+      content: '';
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: #007bff;
+      /* Set the underline color */
+      transition: width 0.3s ease-in-out;
+    }
+
+    h1:hover {
+      color: #007bff;
+      /* Change the text color on hover */
+    }
+
+    h1:hover::after {
+      width: 100%;
+      /* Expand the underline on hover */
+    }
+
+    h1 {
+      font-size: 2em;
+      overflow: hidden;
+      white-space: nowrap;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    h1:hover {
+      transform: scale(1.1);
+      /* Scale the text on hover */
+    }
+
+    .textarea-field {
+      height: 200%;
+    }
+
+    .navbar {
+      height: 110px;
+      background-color: #213b52;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      border-bottom: 1.5px solid white;
+    }
+
+    .nav-logo {
+      height: 50px;
+      width: 100px;
+    }
+
+    /** This is for the logo of Amazon.**/
+    .logo a {
+      width: 10%;
+      height: 50px;
+      color: white;
+      text-decoration: none;
+      margin-right: 100%;
+
+    }
+
+    .h1 {
+      margin-right: 80%;
+    }
+
+    /** The Border around in the navbars option**/
+    .border {
+      border: 1.5px solid transparent;
+    }
+
+    .border:hover {
+      border: 1.5px solid white;
+    }
+
+    .add-icon {
+      display: flex;
+      align-items: center;
+    }
+
+    span {
+      font-size: 0.7rem;
+    }
+
+    .nov-second {
+      font-size: 0.83rem;
+      font-weight: 700;
+    }
+
+    .nav-cart i {
+      font-size: 35px;
+
+    }
+
+    .nav-cart {
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    #footer {
+        background-image: url ("footer-bg.jpg");
+        color: #fff;
+        font-size: 14px;
+        position: fixed;
+        bottom: 6;
+        left: 0;
+        right: 0;
+        z-index: 2;
+      }
+
+    .container footer-bottom clearfix {
+      background-image: url("footer-bg.jpg");
+      background-size: cover;
+    }
+
+    #footer::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 2;
+    }
+
+    #footer .footer-top {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 50px;
+    }
+
+    #footer .footer-top h3 {
+      font-size: 36px;
+      font-weight: 700;
+      color: #fff;
+      position: relative;
+      font-family: "Poppins", sans-serif;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    #footer .footer-top p {
+      font-size: 15;
+      font-style: italic;
+      margin: 30px 0 0 0;
+      padding: 0;
+    }
+
+    #footer .footer-top .footer-newsletter {
+      text-align: center;
+      font-size: 15px;
+      margin-top: 30px;
+    }
+
+    #footer .footer-top .footer-newsletter form {
+      background: #fff;
+      padding: 6px 10px;
+      position: relative;
+      border-radius: 50px;
+      box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+      text-align: left;
+    }
+
+    #footer .footer-top .footer-newsletter form input[type=email] {
+      border: 0;
+      padding: 4px 8px;
+      width: calc(100% - 100px);
+    }
+
+    #footer .footer-top .footer-newsletter form input[type=submit] {
+      position: absolute;
+      top: 0;
+      right: -1px;
+      bottom: 0;
+      border: 0;
+      background: none;
+      font-size: 16px;
+      padding: 0 20px;
+      background: #fdc134;
+      color: #fff;
+      transition: 0.3s;
+      border-radius: 50px;
+      box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    #footer .footer-top .footer-newsletter form input[type=submit]:hover {
+      background: #fcb102;
+    }
+
+    #footer .footer-bottom {
+      border-top: 1.5px solid white;
+      z-index: 2;
+      position: relative;
+      padding-top: 60px;
+    }
+
+    #footer .copyright {
+
+      text-align: center;
+      float: left;
+      margin-left: 42%;
+    }
+
+    #footer .credits {
+      float: right;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    @media (max-width: 768px) {
+
+      #footer .copyright,
+      #footer .credits {
+        padding: 5px;
+        float: none;
+        text-align: center;
+      }
+    }
+
+    .button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #34ffea;
+      overflow: hidden;
+      padding: 30px 70px;
+      font-size: 30;
+      text-decoration: none;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: bold;
+      box-shadow: 0 20px 50px rgb(255 255 255 / 5%)
+    }
+
+
+    .button span:nth-child(1) {
+      position: absolute;
+      width: 100%;
+      height: 5px;
+      top: 0;
+      left: 0;
+      background: linear-gradient(to right, #002b9d, #34ffea);
+      animation: animate1 2s linear infinite;
+    }
+
+    @keyframes animate1 {
+      0% {
+        transform: translateX(-100%);
+      }
+
+      100% {
+        transform: translateX(100%);
+      }
+    }
+
+    .button span:nth-child(2) {
+      position: absolute;
+      width: 5px;
+      height: 100%;
+      top: 0;
+      right: 0;
+      background: linear-gradient(to bottom, #002b9d, #34ffea);
+      animation: animate2 2s linear infinite;
+      animation-delay: 1s;
+    }
+
+    @keyframes animate2 {
+      0% {
+        transform: translateY(-100%);
+      }
+
+      100% {
+        transform: translateY(100%);
+      }
+    }
+
+    .button span:nth-child(3) {
+      position: absolute;
+      width: 100%;
+      height: 5px;
+      left: 0;
+      bottom: 0;
+      background: linear-gradient(to left, #002b9d, #34ffea);
+      animation: animate3 2s linear infinite;
+    }
+
+    @keyframes animate3 {
+      0% {
+        transform: translateX(100%);
+      }
+
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    .button span:nth-child(4) {
+      position: absolute;
+      width: 5px;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: linear-gradient(to top, #002b9d, #34ffea);
+      animation: animate4 2s linear infinite;
+      animation-delay: 1s;
+    }
+
+    @keyframes animate4 {
+      0% {
+        transform: translateY(100%);
+      }
+
+      100% {
+        transform: translateY(-100%);
+      }
+    }
+
+    /* Button Styles */
+    .cool-button {
+      position: relative;
+      display: inline-block;
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #fff;
+      background-color: #3498db;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      overflow: hidden;
+      z-index: 1;
+      background-image: linear-gradient(45deg, #3498db, #e74c3c, #1abc9c, #f39c12);
+      background-size: 400% 400%;
+      animation: gradientAnimation 7s infinite;
+      margin-left: 49.3%;
+    }
+
+    /* Button Animation Styles */
+    @keyframes gradientAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+    /* Your existing styles for larger screens */
+
+/* Media query for screens with a maximum width of 768px (typical for tablets and mobile devices) */
+@media only screen and (max-width: 768px) {
+  body {
+    /* Add styles specific to smaller screens here */
+    font-size: 14px; /* Adjust font size for smaller screens */
+  }
+
+  .container {
+    margin-right: 0; /* Remove right margin for smaller screens */
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+
+  h1 {
+    font-size: 1.5em; /* Adjust font size for smaller screens */
+    margin-left: 0; /* Adjust margin for smaller screens */
+  }
+
+  .input-field,
+  .textarea-field {
+    width: 100%; /* Make the input and textarea full width on smaller screens */
+    margin-left: 0; /* Adjust margin for smaller screens */
+  }
+
+  .submit-button {
+    margin-left: 0; /* Adjust margin for smaller screens */
+  }
+
+  .head2 {
+    margin-left: 10%; /* Adjust margin for smaller screens */
+    font-size: 1.5em; /* Adjust font size for smaller screens */
+  }
+  
+  .footer-top h3 {
+    font-size: 24px; /* Adjust font size for smaller screens */
+  }
+
+  .footer-top h4 {
+    font-size: 14px; /* Adjust font size for smaller screens */
+  }
+
+  #footer .copyright,
+  #footer .credits {
+    margin-left: 0; /* Adjust margin for smaller screens */
+    font-size: 12px; /* Adjust font size for smaller screens */
+  }
+
+  .cool-button {
+    margin-left: 10%; /* Adjust margin for smaller screens */
+  }
+}
+#game-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-grow: 1;
+    width: 80%;
+    margin-top: 8%;
+  }
+
+  #board-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+  }
+
+  #board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-gap: 10px;
+    margin-top: 20px;
+    border: 2px solid #333;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .cell {
+    width: 100px;
+    height: 100px;
+    border: 2px solid #333;
+    font-size: 2em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    color: #333;
+  }
+
+  .cell:hover {
+    background-color: #eee;
+  }
+
+  #result {
+    margin-top: 20px;
+    font-size: 1.5em;
+    color: #333;
+    width: 100%;
+    opacity: 0;
+    animation: slideUp 1s forwards;
+    margin-left: 87%;
+  }
+
+  @keyframes slideUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  #sidebar {
+    width: 20%;
+    padding: 20px;
+    background-color: #5c6bc0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    color: #fff;
+  }
+
+  #sidebar h2 {
+    margin-bottom: 10px;
+  }
+
+  #sidebar button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #7e8ac2;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  #sidebar button:hover {
+    background-color: #4a5598;
+  }
+  @media (max-width: 768px) {
+    /* Styles for screens with a maximum width of 768px */
+
+    #game-container {
+      flex-direction: column;
+    }
+
+    #board-container {
+      width: 100%;
+      order: 2;
+    }
+
+    #board {
+      grid-template-columns: repeat(3, 80px); /* Adjust the size of the cells for smaller screens */
+      grid-gap: 8px; /* Adjust the gap between cells for smaller screens */
+      margin-top: 10px;
+    }
+
+    #result {
+      margin-left: 0;
+    }
+
+    #sidebar {
+      width: 100%;
+      order: 1;
+    }
+  }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="navbar">
+      <div class="container d-flex align-items-center justify-content-between">
+        {% csrf_token %}
+        <div class="logo">
+          <h1>
+            <a href="{% url 'index' %}">DemraBazar<span>.</span></a>
+          </h1>
+          <!-- Uncomment below if you prefer to use an image logo -->
+          <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+        </div>
+      </div>
+  </header>
+  <div id="game-container">
+    <div id="board-container">
+      <div id="board"></div>
+      <div id="result"></div>
+    </div>
+
+    <div id="sidebar">
+      <h2>Select Player</h2>
+      <button onclick="startGame('X')">X</button>
+      <button onclick="startGame('O')">O</button>
+    </div>
+  </div>
+
+  <script>
+    const board = document.getElementById("board");
+    const result = document.getElementById("result");
+    let currentPlayer;
+    let gameBoard;
+    let gameActive = false;
+
+    function checkWinner() {
+      const winPatterns = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+      ];
+
+      for (const pattern of winPatterns) {
+        const [a, b, c] = pattern;
+        if (
+          gameBoard[a] &&
+          gameBoard[a] === gameBoard[b] &&
+          gameBoard[a] === gameBoard[c]
+        ) {
+          return gameBoard[a];
+        }
+      }
+
+      if (!gameBoard.includes("")) {
+        return "T";
+      }
+
+      return null;
+    }
+
+    function handleClick(index) {
+      if (!gameActive || gameBoard[index] !== "") {
+        return;
+      }
+
+      gameBoard[index] = currentPlayer;
+      renderBoard();
+
+      const winner = checkWinner();
+      if (winner) {
+        gameActive = false;
+        if (winner === "T") {
+          result.textContent = "It's a tie!";
+        } else {
+          result.textContent = `Player ${winner} wins!`;
+        }
+      } else {
+        currentPlayer = currentPlayer === "X" ? "O" : "X";
+      }
+    }
+
+    function renderBoard() {
+      board.innerHTML = "";
+      gameBoard.forEach((value, index) => {
+        const cell = document.createElement("div");
+        cell.classList.add("cell");
+        cell.textContent = value;
+        cell.addEventListener("click", () => handleClick(index));
+        board.appendChild(cell);
+      });
+    }
+
+    function startGame(player) {
+      currentPlayer = player;
+      gameBoard = Array(9).fill("");
+      gameActive = true;
+      result.textContent = "";
+      renderBoard();
+    }
+  </script>
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-6">
+            <h3>DemraBazar</h3>
+            <h4>"Unlock Opportunities, Subscribe for Success!".</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom clearfix" style="width: 100%">
+      <div class="copyright" style="width: 20%; margin-left:40%">
+        &copy; Copyright <strong><span>DemraBazar</span></strong>. All Rights Reserved
+      </div>
+  </footer>
+</body>
+
+</html>
